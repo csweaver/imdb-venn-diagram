@@ -1,5 +1,4 @@
-from flask import Flask
-import imdb
+from flask import Flask, render_template
 
 from .api import api
 from .cache import cache
@@ -11,6 +10,6 @@ cache.init_app(app, config={"CACHE_TYPE": "simple", "CACHE_DEFAULT_TIMEOUT": 860
 
 @app.route('/')
 def hello_world():
-	return 'IMDB Venn'
+	return render_template('index.html', content='IMDB Venn')
 
 app.register_blueprint(api)
