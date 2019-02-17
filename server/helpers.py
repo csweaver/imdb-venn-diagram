@@ -47,7 +47,11 @@ class Role(object):
 				rid = r.getID()
 				if rid and not self.cid:
 					self.cid = rid
-				name = f"{name}; {r.get('name', 'unamed role')}"
+				if name:
+					name = f"{name}; {r.get('name', 'unamed role')}"
+				else:
+					name = r.get('name', 'unamed role')
+
 		except (TypeError, KeyError):
 			name = role.get("name", "unnamed role")
 		return name

@@ -44,10 +44,10 @@ class SearchArea extends Component {
 
 	render() {
 		return <div>
-			<label htmlFor="m_search">Search Movie or TV show</label><SearchBox onfocus={this.handleSearch.bind(this)}
+			<label htmlFor="m_search">Search Movie or TV show </label><SearchBox onfocus={this.handleSearch.bind(this)}
 																				onkeypress={this.handleSearch.bind(this)}/>
-			<button onClick={this.handleClear.bind(this)}>Clear</button>
-			<MovieList movies={this.props.search_results.movies}/>
+
+			<MovieList clear={this.handleClear.bind(this)} movies={this.props.search_results.movies}/>
 		</div>
 	}
 }
@@ -62,7 +62,7 @@ const MovieList =
 			return <Movie mid={p.id} key={p.title} title={p.title}/>
 		})
 		return <div>
-			Movies
+			<h2>Movies <button onClick={props.clear}>Clear</button></h2>
 			{movies}
 		</div>
 	}
@@ -111,7 +111,7 @@ class Venn extends Component {
 			let rows = <tr><td>No overlap</td></tr>
 			if (this.props.overlap.overlap.actors.length) {
 				rows = this.props.overlap.overlap.actors.map((actor, aidx) => {
-					const actor_td = <td key={actor[0].id}><a href={actor[0].url}>{actor[0].actor}</a></td>
+					const actor_td = <td key={actor[0].id}><a target="_blank" rel="noopener noreferrer" href={actor[0].url}>{actor[0].actor}</a></td>
 					const row = actor.map((role, idx) => {
 						return <td key={`${role.character}-${idx}`}>{role.character}</td>
 					})
@@ -127,8 +127,8 @@ class Venn extends Component {
 				<tbody>{rows}</tbody>
 			</table>
 		}
-		return <div>Character Overlap
-			<button onClick={this.handleVenn.bind(this)}>Calculate</button>
+		return <div><h2>Character Overlap<button onClick={this.handleVenn.bind(this)}> Calculate</button></h2>
+
 			{table}</div>
 	}
 }

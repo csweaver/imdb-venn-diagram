@@ -41,7 +41,6 @@ export const doVenn = movie_list => {
 	return dispatch => {
 		let movie_params = movie_list.map(movie => `movies=${movie}`)
 		movie_params = movie_params.join("&")
-		console.log(`${venn_url}?${movie_params}`)
 		return fetch(`${venn_url}?${movie_params}`, { credentials: "same-origin" })
 			.then(response => {
 				if (response.status >= 400 && response.status < 600) {

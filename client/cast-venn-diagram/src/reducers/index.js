@@ -24,7 +24,6 @@ const search_results = (state = {movies: []}, action) => {
 	}
 	else if (action.type === "clear unselected") {
 		const movies = state.movies.filter(movie => {
-			console.log(movie.id, action.currently_selected.includes(movie.id))
 			    return action.currently_selected.includes(movie.id)
 		})
 		return {
