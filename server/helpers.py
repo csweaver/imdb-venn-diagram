@@ -36,7 +36,6 @@ class Role(object):
 			"actor": self.actor,
 			"character": self.character,
 			"url": self.actor_url,
-			"character_url": self.character_url
 		}
 
 	def _init_char(self, c):
@@ -56,8 +55,6 @@ class Role(object):
 	def _update_urls(self):
 		if self.aid:
 			self.actor_url = f"https://www.imdb.com/name/nm{self.aid}"
-		if self.cid:
-			self.character_url = f"https://www.imdb.com/title/tt0145487/characters/nm{self.cid}"
 
 
 class SearchMovie(object):
