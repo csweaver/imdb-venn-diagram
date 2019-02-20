@@ -33,5 +33,3 @@ def venn():
 		"actors": actors
 	}
 	return jsonify(result)
-
-bp = Blueprint("api", __name__, url_prefix="/api")
