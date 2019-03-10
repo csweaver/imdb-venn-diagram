@@ -62,9 +62,7 @@ class SearchBox extends Component {
         results={this.props.search_results.movies}
         resultRenderer={ResultsRender}
         value={this.state.value}
-      >
-        <Search.Results fluid />
-      </Search>
+      />
     );
   }
 }

@@ -73,7 +73,11 @@ class Venn extends Component {
       <div className="section">
         <Header color="teal" as="h2">
           Character Overlap
-          <Button disabled={disableSearch} onClick={this.handleVenn.bind(this)}>
+          <Button
+            className="section-button"
+            disabled={disableSearch}
+            onClick={this.handleVenn.bind(this)}
+          >
             {" "}
             Calculate
           </Button>

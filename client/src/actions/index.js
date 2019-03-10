@@ -38,11 +38,6 @@ export const addSelection = movie => ({
   selected: movie
 });
 
-export const deleteSelection = movie_id => ({
-  type: "remove movie from selection",
-  deselected: movie_id
-});
-
 export const addChosenForVenn = movie_id => ({
   type: "add movie to chosen for venn",
   chosen: movie_id
@@ -82,6 +77,10 @@ const recieveVenn = json => ({
   receivedAt: Date.now()
 });
 
-export const clearUnchosen = movie_list => ({
-  type: "clear unchosen"
+export const clearUnchosen = () => ({
+  type: "clear all unchosen movies"
+});
+
+export const clearAll = () => ({
+  type: "clear all selected movies"
 });

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {
   addChosenForVenn,
   clearUnchosen,
+  clearAll,
   removeChosenForVenn
 } from "../actions";
 import { Header, Button, List } from "semantic-ui-react";
@@ -11,10 +12,14 @@ import { Header, Button, List } from "semantic-ui-react";
   return { movies: state.movies };
 })
 class MovieList extends Component {
-  handleClear(e) {
+  handleClearUnselected = e => {
     const { dispatch } = this.props;
     dispatch(clearUnchosen());
-  }
+  };
+  handleClearAll = e => {
+    const { dispatch } = this.props;
+    dispatch(clearAll());
+  };
 
   render() {
     let movies = this.props.movies.selected.map(p => {
@@ -33,8 +38,14 @@ class MovieList extends Component {
       <div className="section">
         <Header color="teal" as="h2">
           Movies{" "}
-          <Button disabled onClick={this.handleClear}>
-            Clear
+          <Button className="section-button" onClick={this.handleClearAll}>
+            Clear All
+          </Button>
+          <Button
+            className="section-button"
+            onClick={this.handleClearUnselected}
+          >
+            Clear Unselected
           </Button>
         </Header>
         <List divided inverted relaxed>

@@ -56,6 +56,21 @@ const movies = (state = { selected: [], chosen: [] }, action) => {
       ...state,
       chosen
     };
+  } else if (action.type === "clear all unchosen movies") {
+    const selected = state.selected.filter(val => {
+      return state.chosen.includes(val.id);
+    });
+    return {
+      ...state,
+      chosen: [],
+      selected: selected
+    };
+  } else if (action.type === "clear all selected movies") {
+    return {
+      ...state,
+      chosen: [],
+      selected: []
+    };
   } else {
     return state;
   }
