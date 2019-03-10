@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { clearSearchResults, doSearch, addSelection } from "../actions";
-import { Search } from "semantic-ui-react";
+import { Search, Container } from "semantic-ui-react";
 
 class SearchArea extends Component {
   render() {
     return (
       <div>
         <label htmlFor="m_search">Search Movie or TV show </label>
-        <SearchBox />
+        <Container>
+          <SearchBox />
+        </Container>
       </div>
     );
   }
@@ -51,7 +53,8 @@ class SearchBox extends Component {
     // TODO loading, reset on select
     return (
       <Search
-        size="large"
+        input={{ fluid: true }}
+        fluid
         onResultSelect={this.handleSelect}
         onKeyPress={this.handleSearch}
         onSearchChange={this.handleChange}
@@ -59,7 +62,9 @@ class SearchBox extends Component {
         results={this.props.search_results.movies}
         resultRenderer={ResultsRender}
         value={this.state.value}
-      />
+      >
+        <Search.Results fluid />
+      </Search>
     );
   }
 }
