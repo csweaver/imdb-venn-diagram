@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import { doVenn } from "../actions";
-import { Header, Button } from "semantic-ui-react";
+import { Header, Button, Table } from "semantic-ui-react";
 
 @connect(state => {
   return {
@@ -20,43 +20,53 @@ class Venn extends Component {
     let disableSearch = this.props.movies.chosen.length < 2;
     if (this.props.overlap.overlap.movies.length) {
       const header = this.props.overlap.overlap.movies.map(m => {
-        return <th key={m.id}>{m.title}</th>;
+        return (
+          <Table.HeaderCell key={m.id}>
+            <a target="_blank" href={m.url}>
+              {m.title}
+            </a>
+          </Table.HeaderCell>
+        );
       });
       let rows = (
-        <tr>
-          <td>No overlap</td>
-        </tr>
+        <Table.Row>
+          <Table.Cell>No overlap</Table.Cell>
+        </Table.Row>
       );
       if (this.props.overlap.overlap.actors.length) {
         rows = this.props.overlap.overlap.actors.map((actor, aidx) => {
           const actor_td = (
-            <td key={actor[0].id}>
+            <Table.Cell key={actor[0].id}>
               <a target="_blank" rel="noopener noreferrer" href={actor[0].url}>
                 {actor[0].actor}
               </a>
-            </td>
+            </Table.Cell>
           );
           const row = actor.map((role, idx) => {
-            return <td key={`${role.character}-${idx}`}>{role.character}</td>;
+            return (
+              <Table.Cell key={`${role.character}-${idx}`}>
+                {role.character}
+              </Table.Cell>
+            );
           });
           return (
-            <tr key={aidx}>
+            <Table.Row key={aidx}>
               {actor_td}
               {row}
-            </tr>
+            </Table.Row>
           );
         });
       }
       table = (
-        <table>
-          <thead>
-            <tr>
-              <th>Actor</th>
+        <Table compact celled>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Actor</Table.HeaderCell>
               {header}
-            </tr>
-          </thead>
-          <tbody>{rows}</tbody>
-        </table>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>{rows}</Table.Body>
+        </Table>
       );
     }
     return (
