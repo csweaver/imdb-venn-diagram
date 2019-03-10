@@ -82,7 +82,7 @@ class Movie extends Component {
           onClick={this.handleCheck.bind(this)}
           defaultChecked={this.props.selected}
           type="checkbox"
-        />
+        />{" "}
         {this.props.title}
       </List.Item>
     );
