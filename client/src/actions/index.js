@@ -29,6 +29,10 @@ export const doSearch = movie_string => {
   };
 };
 
+export const clearSearchResults = () => ({
+  type: "clear movie search results"
+});
+
 export const addSelection = movie => ({
   type: "add movie to selection",
   selected: movie
@@ -79,6 +83,5 @@ const recieveVenn = json => ({
 });
 
 export const clearUnchosen = movie_list => ({
-  type: "clear unchosen",
-  currently_selected: movie_list
+  type: "clear unchosen"
 });

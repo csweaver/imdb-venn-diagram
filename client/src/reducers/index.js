@@ -3,16 +3,6 @@
  */
 import { combineReducers } from "redux";
 
-const basic = (state = {}, action) => {
-  if (action.type === "basic type") {
-    return {
-      ...state
-    };
-  } else {
-    return state;
-  }
-};
-
 const search_results = (state = { movies: [] }, action) => {
   if (action.type === "got movie search results") {
     let movies = state.movies;
@@ -21,35 +11,36 @@ const search_results = (state = { movies: [] }, action) => {
       ...state,
       movies
     };
+  } else if (action.type === "clear movie search results") {
+    const movies = [];
+    return { ...state, movies };
   } else {
     return state;
   }
 };
 
-const selected_movies = (state = { selected: [] }, action) => {
+const movies = (state = { selected: [], chosen: [] }, action) => {
   if (action.type === "add movie to selection") {
     let selected = state.selected;
+    let chosen = state.chosen;
     selected.push(action.selected);
+    chosen.push(action.selected.id);
     return {
       ...state,
-      selected
+      selected,
+      chosen
     };
   } else if (action.type === "remove movie from selection") {
     let selected = state.selected;
     selected = selected.filter(val => {
       return val.id !== action.deselected;
     });
+
     return {
       ...state,
       selected
     };
-  } else {
-    return state;
-  }
-};
-
-const chosen_movies = (state = { chosen: [] }, action) => {
-  if (action.type === "add movie to chosen for venn") {
+  } else if (action.type === "add movie to chosen for venn") {
     let chosen = state.chosen;
     chosen.push(action.chosen);
     return {
@@ -61,12 +52,6 @@ const chosen_movies = (state = { chosen: [] }, action) => {
     chosen = chosen.filter(val => {
       return val !== action.unchosen;
     });
-    return {
-      ...state,
-      chosen
-    };
-  } else if (action.type === "clear unchosen") {
-    let chosen = [];
     return {
       ...state,
       chosen
@@ -88,9 +73,7 @@ const overlap = (state = { overlap: { movies: [], actors: [] } }, action) => {
 };
 
 export const rootReducer = combineReducers({
-  basic,
   search_results,
-  selected_movies,
-  chosen_movies,
+  movies,
   overlap
 });

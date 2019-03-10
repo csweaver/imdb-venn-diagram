@@ -1,21 +1,23 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import { doVenn } from "../actions";
+import { Header, Button } from "semantic-ui-react";
 
 @connect(state => {
   return {
-    chosen_movies: state.chosen_movies,
+    movies: state.movies,
     overlap: state.overlap
   };
 })
 class Venn extends Component {
   handleVenn() {
     const { dispatch } = this.props;
-    dispatch(doVenn(this.props.chosen_movies.chosen));
+    dispatch(doVenn(this.props.movies.chosen));
   }
 
   render() {
     let table = "";
+    let disableSearch = this.props.movies.chosen.length < 2;
     if (this.props.overlap.overlap.movies.length) {
       const header = this.props.overlap.overlap.movies.map(m => {
         return <th key={m.id}>{m.title}</th>;
@@ -58,11 +60,14 @@ class Venn extends Component {
       );
     }
     return (
-      <div>
-        <h2>
+      <div className="section">
+        <Header color="teal" as="h2">
           Character Overlap
-          <button onClick={this.handleVenn.bind(this)}> Calculate</button>
-        </h2>
+          <Button disabled={disableSearch} onClick={this.handleVenn.bind(this)}>
+            {" "}
+            Calculate
+          </Button>
+        </Header>
 
         {table}
       </div>

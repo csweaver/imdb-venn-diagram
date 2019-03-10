@@ -3,6 +3,7 @@ import "./App.css";
 import { Venn } from "./VennResults";
 import { SearchArea } from "./Search";
 import { Container, Header } from "semantic-ui-react";
+import { MovieList } from "./Movie";
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
             figure out which actors were in all of them
           </p>
           <SearchArea />
+          <MovieList />
           <Venn />
         </Container>
       </div>
