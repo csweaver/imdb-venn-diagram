@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addSelection, deleteSelection } from "../actions";
+import { addChosenForVenn, removeChosenForVenn } from "../actions";
 
 export const MovieList = props => {
   let movies = props.movies.map(p => {
-    return <Movie mid={p.id} key={p.title} title={p.title} />;
+    return <Movie mid={p.id} key={`${p.title}_movie`} title={p.title} />;
   });
   return (
     <div>
@@ -24,9 +24,9 @@ class Movie extends Component {
     const checkbox = e.target;
     const { dispatch } = this.props;
     if (checkbox.checked) {
-      dispatch(addSelection(this.props.mid));
+      dispatch(addChosenForVenn(this.props.mid));
     } else {
-      dispatch(deleteSelection(this.props.mid));
+      dispatch(removeChosenForVenn(this.props.mid));
     }
   }
 

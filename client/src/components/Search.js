@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { clearUnselected, doSearch } from "../actions";
+import { clearUnchosen, doSearch, addSelection } from "../actions";
 import { MovieList } from "./Movie";
+import { Search } from "semantic-ui-react";
 
 @connect(state => {
   return {
     search_results: state.search_results,
-    selected_movies: state.selected_movies
+    selected_movies: state.selected_movies,
+    chosen_movies: state.chosen_movies
   };
 })
-export class SearchArea extends Component {
+class SearchArea extends Component {
   handleSearch(e, data) {
-    // TODO actually search for movie
+    console.log("here i am");
     if (e.charCode === 13) {
       const { dispatch } = this.props;
       dispatch(doSearch(e.target.value));
@@ -21,7 +23,13 @@ export class SearchArea extends Component {
 
   handleClear(e) {
     const { dispatch } = this.props;
-    dispatch(clearUnselected(this.props.selected_movies.selected));
+    dispatch(clearUnchosen(this.props.chosen_movies.chosen));
+  }
+
+  handleSelect(e, { result }) {
+    const { dispatch } = this.props;
+    console.log("Select", result);
+    dispatch(addSelection(result));
   }
 
   render() {
@@ -29,13 +37,14 @@ export class SearchArea extends Component {
       <div>
         <label htmlFor="m_search">Search Movie or TV show </label>
         <SearchBox
-          onfocus={this.handleSearch.bind(this)}
-          onkeypress={this.handleSearch.bind(this)}
+          searchfunc={this.handleSearch.bind(this)}
+          selectfunc={this.handleSelect.bind(this)}
+          results={this.props.search_results.movies}
         />
 
         <MovieList
           clear={this.handleClear.bind(this)}
-          movies={this.props.search_results.movies}
+          movies={this.props.selected_movies.selected}
         />
       </div>
     );
@@ -43,5 +52,20 @@ export class SearchArea extends Component {
 }
 
 const SearchBox = props => {
-  return <input id="m_search" onKeyPress={props.onkeypress} type="text" />;
+  // TODO loading, reset on select
+  return (
+    <Search
+      size="large"
+      onResultSelect={props.selectfunc}
+      onKeyPress={props.searchfunc}
+      results={props.results}
+      resultRenderer={ResultsRender}
+    />
+  );
 };
+
+const ResultsRender = props => {
+  return <span>{props.title}</span>;
+};
+
+export { SearchArea };

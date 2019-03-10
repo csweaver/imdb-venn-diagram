@@ -21,14 +21,6 @@ const search_results = (state = { movies: [] }, action) => {
       ...state,
       movies
     };
-  } else if (action.type === "clear unselected") {
-    const movies = state.movies.filter(movie => {
-      return action.currently_selected.includes(movie.id);
-    });
-    return {
-      ...state,
-      movies: movies
-    };
   } else {
     return state;
   }
@@ -45,11 +37,39 @@ const selected_movies = (state = { selected: [] }, action) => {
   } else if (action.type === "remove movie from selection") {
     let selected = state.selected;
     selected = selected.filter(val => {
-      return val !== action.deselected;
+      return val.id !== action.deselected;
     });
     return {
       ...state,
       selected
+    };
+  } else {
+    return state;
+  }
+};
+
+const chosen_movies = (state = { chosen: [] }, action) => {
+  if (action.type === "add movie to chosen for venn") {
+    let chosen = state.chosen;
+    chosen.push(action.chosen);
+    return {
+      ...state,
+      chosen
+    };
+  } else if (action.type === "remove movie from chosen for venn") {
+    let chosen = state.chosen;
+    chosen = chosen.filter(val => {
+      return val !== action.unchosen;
+    });
+    return {
+      ...state,
+      chosen
+    };
+  } else if (action.type === "clear unchosen") {
+    let chosen = [];
+    return {
+      ...state,
+      chosen
     };
   } else {
     return state;
@@ -71,5 +91,6 @@ export const rootReducer = combineReducers({
   basic,
   search_results,
   selected_movies,
+  chosen_movies,
   overlap
 });

@@ -4,14 +4,14 @@ import { doVenn } from "../actions";
 
 @connect(state => {
   return {
-    selected_movies: state.selected_movies,
+    chosen_movies: state.chosen_movies,
     overlap: state.overlap
   };
 })
-export class Venn extends Component {
+class Venn extends Component {
   handleVenn() {
     const { dispatch } = this.props;
-    dispatch(doVenn(this.props.selected_movies.selected));
+    dispatch(doVenn(this.props.chosen_movies.chosen));
   }
 
   render() {
@@ -69,3 +69,5 @@ export class Venn extends Component {
     );
   }
 }
+
+export { Venn };
