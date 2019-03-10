@@ -7,8 +7,17 @@ const recieveSearch = json => ({
   receivedAt: Date.now()
 });
 
+const startSearch = () => ({
+  type: "start searching for movie"
+});
+
+const failedSearch = () => ({
+  type: "failed searching for movie"
+});
+
 export const doSearch = movie_string => {
   return dispatch => {
+    dispatch(startSearch);
     console.log(`${search_url}?title=${movie_string}`);
     return fetch(`${search_url}?title=${movie_string}`, {
       credentials: "same-origin"
@@ -23,6 +32,7 @@ export const doSearch = movie_string => {
         dispatch(recieveSearch(json));
       })
       .catch(e => {
+        dispatch(failedSearch());
         console.log(e);
         console.log("something went wrong");
       });
@@ -50,6 +60,7 @@ export const removeChosenForVenn = movie_id => ({
 
 export const doVenn = movie_list => {
   return dispatch => {
+    dispatch(startVenn());
     let movie_params = movie_list.map(movie => `movies=${movie}`);
     movie_params = movie_params.join("&");
     console.log(`${venn_url}?${movie_params}`);
@@ -65,6 +76,7 @@ export const doVenn = movie_list => {
         dispatch(recieveVenn(json));
       })
       .catch(e => {
+        dispatch(failedVenn());
         console.log(e);
         console.log("something went wrong");
       });
@@ -75,6 +87,14 @@ const recieveVenn = json => ({
   type: "got venn results",
   results: json,
   receivedAt: Date.now()
+});
+
+const startVenn = () => ({
+  type: "start venn"
+});
+
+const failedVenn = () => ({
+  type: "failed venn"
 });
 
 export const clearUnchosen = () => ({

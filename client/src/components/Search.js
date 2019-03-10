@@ -55,6 +55,7 @@ class SearchBox extends Component {
       <Search
         input={{ fluid: true }}
         fluid
+        loading={this.props.search_results.loading}
         onResultSelect={this.handleSelect}
         onKeyPress={this.handleSearch}
         onSearchChange={this.handleChange}

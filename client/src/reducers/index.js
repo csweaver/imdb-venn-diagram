@@ -3,13 +3,29 @@
  */
 import { combineReducers } from "redux";
 
-const search_results = (state = { movies: [] }, action) => {
-  if (action.type === "got movie search results") {
+const search_results = (
+  state = { movies: [], loading: false, error: false },
+  action
+) => {
+  if (action.type === "start searching for movie") {
+    return {
+      ...state,
+      loading: true,
+      error: false
+    };
+  } else if (action.type === "got movie search results") {
     let movies = state.movies;
     movies = movies.concat(action.movies);
     return {
       ...state,
-      movies
+      movies,
+      loading: false
+    };
+  } else if (action.type === "failed searching for movie") {
+    return {
+      ...state,
+      loading: false,
+      error: true
     };
   } else if (action.type === "clear movie search results") {
     const movies = [];
@@ -62,7 +78,6 @@ const movies = (state = { selected: [], chosen: [] }, action) => {
     });
     return {
       ...state,
-      chosen: [],
       selected: selected
     };
   } else if (action.type === "clear all selected movies") {
@@ -76,11 +91,27 @@ const movies = (state = { selected: [], chosen: [] }, action) => {
   }
 };
 
-const overlap = (state = { overlap: { movies: [], actors: [] } }, action) => {
+const overlap = (
+  state = { overlap: { movies: [], actors: [], loading: false, error: false } },
+  action
+) => {
   if (action.type === "got venn results") {
     return {
       ...state,
-      overlap: action.results
+      overlap: action.results,
+      loading: false
+    };
+  } else if (action.type === "start venn") {
+    return {
+      ...state,
+      loading: true,
+      error: false
+    };
+  } else if (action.type === "failed venn") {
+    return {
+      ...state,
+      loading: false,
+      error: true
     };
   } else {
     return state;

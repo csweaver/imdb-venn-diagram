@@ -22,7 +22,7 @@ class Venn extends Component {
       const header = this.props.overlap.overlap.movies.map(m => {
         return (
           <Table.HeaderCell key={m.id}>
-            <a target="_blank" href={m.url}>
+            <a target="_blank" rel="noopener noreferrer" href={m.url}>
               {m.title}
             </a>
           </Table.HeaderCell>
@@ -76,6 +76,7 @@ class Venn extends Component {
           <Button
             className="section-button"
             disabled={disableSearch}
+            loading={this.props.overlap.overlap.loading}
             onClick={this.handleVenn.bind(this)}
           >
             {" "}

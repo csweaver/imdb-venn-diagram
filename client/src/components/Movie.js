@@ -38,10 +38,15 @@ class MovieList extends Component {
       <div className="section">
         <Header color="teal" as="h2">
           Movies{" "}
-          <Button className="section-button" onClick={this.handleClearAll}>
+          <Button
+            basic
+            className="section-button"
+            onClick={this.handleClearAll}
+          >
             Clear All
           </Button>
           <Button
+            basic
             className="section-button"
             onClick={this.handleClearUnselected}
           >
