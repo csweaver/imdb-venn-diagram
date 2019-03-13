@@ -15,14 +15,14 @@ class MovieCast(object):
 		return {c.getID():c for c in self.movie["cast"] if c.getID() is not None}
 
 	def serialize(self):
-		return SearchMovie(self.movie).searilize()
+		return SearchMovie(self.movie).serialize()
 
 
 class Role(object):
 	def __init__(self, c):
 		self.aid = c.getID()
 		self.cid = None
-		self.actor = clean_name(c["name"])
+		self.actor = clean_name(intense_get(c, ["long imdb name", "name"], "long imdb name"))
 		self.character = clean_name(self._init_char(c))
 		self.actor_url = None
 		self.character_url = None
@@ -67,15 +67,19 @@ class SearchMovie(object):
 		self.mid = m.getID()
 		self.title = intense_get(m, ["long imdb title", "title", "smart long imdb canonical title", "canonical title"], ""),
 		self.year = m.get("year", 0),
+		self.kind = m.get("kind", "unknown")
 		self.imdb_url = f"https://www.imdb.com/title/tt{self.mid}/"
+		self.image = m.get("full-size cover url", "")
 		self._flatten_attr()
 
-	def searilize(self):
+	def serialize(self):
 		movie_dict = {
 			"id": self.mid,
 			"title": self.title,
 			"year": self.year,
-			"url": self.imdb_url
+			"url": self.imdb_url,
+			"image": self.image,
+			"kind": self.kind
 		}
 		return movie_dict
 
@@ -86,6 +90,7 @@ class SearchMovie(object):
 				self.year = self.year[0]
 		except TypeError as e:
 			print(e)
+
 
 
 def venn_cast(movie_list):

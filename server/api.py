@@ -11,7 +11,7 @@ api = Blueprint("api", __name__, url_prefix="/api")
 def search():
 	title = request.args.get("title", "")
 	search_results = ia.search_movie(title)
-	search_results = [SearchMovie(m).searilize() for m in search_results]
+	search_results = [SearchMovie(m).serialize() for m in search_results]
 	return jsonify({"possibilities": search_results})
 
 

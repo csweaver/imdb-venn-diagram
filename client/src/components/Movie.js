@@ -29,6 +29,7 @@ class MovieList extends Component {
           mid={p.id}
           key={`${p.title}_movie`}
           title={p.title}
+          kind={p.kind}
           selected={selected}
         />
       );
@@ -84,6 +85,8 @@ class Movie extends Component {
           type="checkbox"
         />{" "}
         {this.props.title}
+        {" - "}
+        {this.props.kind}
       </List.Item>
     );
   }

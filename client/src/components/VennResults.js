@@ -24,6 +24,7 @@ class Venn extends Component {
       const header = this.props.overlap_movies.map(m => {
         return (
           <Table.HeaderCell key={m.id}>
+            <img alt={m.title} src={m.image} height="54" width="40" />
             <a target="_blank" rel="noopener noreferrer" href={m.url}>
               {m.title}
             </a>

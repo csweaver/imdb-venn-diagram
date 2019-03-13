@@ -69,7 +69,11 @@ class SearchBox extends Component {
 }
 
 const ResultsRender = props => {
-  return <span>{props.title}</span>;
+  return (
+    <span>
+      <span>{props.title}</span> - <span>{props.kind}</span>
+    </span>
+  );
 };
 
 export { SearchArea };
