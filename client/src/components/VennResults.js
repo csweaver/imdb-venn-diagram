@@ -6,7 +6,9 @@ import { Header, Button, Table } from "semantic-ui-react";
 @connect(state => {
   return {
     movies: state.movies,
-    overlap: state.overlap
+    overlap_movies: state.overlap.movies,
+    overlap_actors: state.overlap.actors,
+    loading: state.overlap.loading
   };
 })
 class Venn extends Component {
@@ -18,8 +20,8 @@ class Venn extends Component {
   render() {
     let table = "";
     let disableSearch = this.props.movies.chosen.length < 2;
-    if (this.props.overlap.overlap.movies.length) {
-      const header = this.props.overlap.overlap.movies.map(m => {
+    if (this.props.overlap_movies.length) {
+      const header = this.props.overlap_movies.map(m => {
         return (
           <Table.HeaderCell key={m.id}>
             <a target="_blank" rel="noopener noreferrer" href={m.url}>
@@ -33,8 +35,8 @@ class Venn extends Component {
           <Table.Cell>No overlap</Table.Cell>
         </Table.Row>
       );
-      if (this.props.overlap.overlap.actors.length) {
-        rows = this.props.overlap.overlap.actors.map((actor, aidx) => {
+      if (this.props.overlap_actors.length) {
+        rows = this.props.overlap_actors.map((actor, aidx) => {
           const actor_td = (
             <Table.Cell key={actor[0].id}>
               <a target="_blank" rel="noopener noreferrer" href={actor[0].url}>
@@ -76,7 +78,7 @@ class Venn extends Component {
           <Button
             className="section-button"
             disabled={disableSearch}
-            loading={this.props.overlap.overlap.loading}
+            loading={this.props.loading}
             onClick={this.handleVenn.bind(this)}
           >
             {" "}

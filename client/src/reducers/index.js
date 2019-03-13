@@ -92,13 +92,14 @@ const movies = (state = { selected: [], chosen: [] }, action) => {
 };
 
 const overlap = (
-  state = { overlap: { movies: [], actors: [], loading: false, error: false } },
+  state = { movies: [], actors: [], loading: false, error: false },
   action
 ) => {
   if (action.type === "got venn results") {
     return {
       ...state,
-      overlap: action.results,
+      movies: action.results.movies,
+      actors: action.results.actors,
       loading: false
     };
   } else if (action.type === "start venn") {
