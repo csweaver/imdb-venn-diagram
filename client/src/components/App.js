@@ -8,8 +8,8 @@ import { MovieList } from "./Movie";
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Container>
+      <div id={"app"} className="App">
+        <Container id={"container"}>
           <Header as="h1" dividing color="teal">
             IMDB Venn Diagram
           </Header>
