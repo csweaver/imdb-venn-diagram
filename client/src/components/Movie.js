@@ -6,7 +6,7 @@ import {
   clearAll,
   removeChosenForVenn
 } from "../actions";
-import { Header, Button, List } from "semantic-ui-react";
+import { Header, Button, List, Checkbox } from "semantic-ui-react";
 
 @connect(state => {
   return { movies: state.movies };
@@ -44,14 +44,14 @@ class MovieList extends Component {
             className="section-button"
             onClick={this.handleClearAll}
           >
-            Clear All
+            Remove All
           </Button>
           <Button
             basic
             className="section-button"
             onClick={this.handleClearUnselected}
           >
-            Clear Unselected
+            Remove Unselected
           </Button>
         </Header>
         <List divided inverted relaxed>
@@ -66,10 +66,12 @@ class MovieList extends Component {
   return {};
 })
 class Movie extends Component {
+  state = { checked: false };
+
   handleCheck(e) {
-    const checkbox = e.target;
     const { dispatch } = this.props;
-    if (checkbox.checked) {
+    this.setState({ checked: !this.state.checked });
+    if (this.state.checked) {
       dispatch(addChosenForVenn(this.props.mid));
     } else {
       dispatch(removeChosenForVenn(this.props.mid));
@@ -77,16 +79,14 @@ class Movie extends Component {
   }
 
   render() {
+    const label = `${this.props.title} - ${this.props.kind}`;
     return (
       <List.Item>
-        <input
+        <Checkbox
           onClick={this.handleCheck.bind(this)}
+          label={label}
           defaultChecked={this.props.selected}
-          type="checkbox"
-        />{" "}
-        {this.props.title}
-        {" - "}
-        {this.props.kind}
+        />
       </List.Item>
     );
   }
