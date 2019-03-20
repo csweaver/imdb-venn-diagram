@@ -2,11 +2,9 @@ import re
 
 
 def intense_get(dictionary, key_list, default=None):
-	print(dictionary)
 	result = None
 	for k in key_list:
 		result = dictionary.get(k, None)
-		print(k, result)
 		if result:
 			break
 	if not result:

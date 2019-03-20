@@ -63,7 +63,6 @@ class Role(object):
 
 class SearchMovie(object):
 	def __init__(self, m):
-		print(m)
 		self.mid = m.getID()
 		self.title = intense_get(m, ["long imdb title", "title", "smart long imdb canonical title", "canonical title"], ""),
 		self.year = m.get("year", 0),
