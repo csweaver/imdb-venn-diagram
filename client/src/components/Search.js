@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { clearSearchResults, doSearch, addSelection } from "../actions";
 import { Search, Container } from "semantic-ui-react";
+import _ from "lodash";
 
 class SearchArea extends Component {
   render() {
@@ -34,14 +35,27 @@ class SearchBox extends Component {
 
   handleChange = (e, { value }) => {
     this.setState({ value });
+    this.search();
   };
 
   handleSearch = e => {
     if (e.charCode === 13) {
-      const { dispatch } = this.props;
-      dispatch(doSearch(this.state.value));
+      this.search();
     }
   };
+
+  search = _.debounce(
+    () => {
+      const { dispatch } = this.props;
+      dispatch(clearSearchResults());
+      dispatch(doSearch(this.state.value));
+    },
+    1000,
+    {
+      leading: true,
+      trailing: true
+    }
+  );
 
   handleSelect = (e, { result }) => {
     const { dispatch } = this.props;
@@ -50,7 +64,6 @@ class SearchBox extends Component {
   };
 
   render() {
-    // TODO loading, reset on select
     return (
       <Search
         input={{ fluid: true }}
