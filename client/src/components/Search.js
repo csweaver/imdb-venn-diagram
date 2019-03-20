@@ -71,7 +71,7 @@ class SearchBox extends Component {
 const ResultsRender = props => {
   return (
     <span>
-      <span>{props.title}</span> - <span>{props.kind}</span>
+      <span key={props.id}>{props.title}</span> - <span>{props.kind}</span>
     </span>
   );
 };

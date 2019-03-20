@@ -54,9 +54,7 @@ class MovieList extends Component {
             Remove Unselected
           </Button>
         </Header>
-        <List divided inverted relaxed>
-          {movies}
-        </List>
+        <List relaxed>{movies}</List>
       </div>
     );
   }

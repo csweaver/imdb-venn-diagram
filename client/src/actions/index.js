@@ -1,5 +1,7 @@
-const search_url = "http://localhost:5000/api/search";
-const venn_url = "http://localhost:5000/api/venn";
+const base_url = "http://localhost:5000/api";
+const search_url = `${base_url}/search`;
+const venn_url = `${base_url}/venn`;
+const select_url = `${base_url}/select`;
 
 const recieveSearch = json => ({
   type: "got movie search results",
@@ -43,10 +45,36 @@ export const clearSearchResults = () => ({
   type: "clear movie search results"
 });
 
-export const addSelection = movie => ({
+export const addSelection = movie => {
+  return dispatch => {
+    dispatch(prefetchMovie(movie.id));
+    dispatch(addMovieToSelected(movie));
+  };
+};
+
+const addMovieToSelected = movie => ({
   type: "add movie to selection",
   selected: movie
 });
+
+const prefetchMovie = movie => {
+  return dispatch => {
+    console.log(`${select_url}?movie=${movie}`);
+    return fetch(`${select_url}?movie=${movie}`, {
+      credentials: "same-origin"
+    })
+      .then(response => {
+        return {
+          type: "prefetch movie",
+          movie: movie
+        };
+      })
+      .catch(e => {
+        console.log(e);
+        console.log("something went wrong with prefetch");
+      });
+  };
+};
 
 export const addChosenForVenn = movie_id => ({
   type: "add movie to chosen for venn",
