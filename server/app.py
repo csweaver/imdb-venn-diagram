@@ -8,6 +8,7 @@ from .page import page
 app = Flask(__name__, static_url_path="/resources",)
 app.config.update(DEBUG=True)
 app.config.update(SECRET_KEY="ThisIsAMagicKey")
+app.logger.info("starting imdb venn diagram")
 CORS(app)
 cache.init_app(app, config={"CACHE_TYPE": "simple", "CACHE_DEFAULT_TIMEOUT": 860_000})
 

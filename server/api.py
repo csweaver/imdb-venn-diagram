@@ -11,6 +11,7 @@ api = Blueprint("api", __name__, url_prefix="/api")
 def search():
 	title = request.args.get("title", "")
 	search_results = ia.search_movie(title)
+	current_app.logger.info(f"searching movie: {title}")
 	search_results = [SearchMovie(m).serialize() for m in search_results]
 	return jsonify({"possibilities": search_results})
 
@@ -32,4 +33,7 @@ def venn():
 		"movies": [m.serialize() for m in venn_movies],
 		"actors": actors
 	}
+	num_movies = len(venn_movies)
+	titles = ",".join([m.serialize()["title"] for m in venn_movies])
+	current_app.logger.info(f"cast overlap for {num_movies} movies: {titles}")
 	return jsonify(result)
