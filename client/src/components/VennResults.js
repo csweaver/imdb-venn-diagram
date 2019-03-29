@@ -63,7 +63,7 @@ class Venn extends Component {
         });
       }
       table = (
-        <Table compact celled>
+        <Table color="teal" compact celled>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell width={2}>Actor</Table.HeaderCell>
