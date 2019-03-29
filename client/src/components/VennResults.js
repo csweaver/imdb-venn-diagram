@@ -21,9 +21,10 @@ class Venn extends Component {
     let table = "";
     let disableSearch = this.props.movies.chosen.length < 2;
     if (this.props.overlap_movies.length) {
+      const col_width = Math.floor(14 / this.props.overlap_movies.length);
       const header = this.props.overlap_movies.map(m => {
         return (
-          <Table.HeaderCell key={m.id}>
+          <Table.HeaderCell width={`${col_width}`} key={m.id}>
             <img alt={m.title} src={m.image} height="54" width="40" />{" "}
             <a target="_blank" rel="noopener noreferrer" href={m.url}>
               {m.title}
@@ -65,7 +66,7 @@ class Venn extends Component {
         <Table compact celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Actor</Table.HeaderCell>
+              <Table.HeaderCell width={2}>Actor</Table.HeaderCell>
               {header}
             </Table.Row>
           </Table.Header>
