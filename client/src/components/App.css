@@ -2,18 +2,29 @@
 	/*text-align: center;*/
 }
 
-
 .App-link {
 	color: #61dafb;
 }
-#root, .App{
-	     height: 100%;
+
+#root, .App {
+	height: 100%;
 }
 
 .container {
 	padding: 10px 20px;
-	background-color: white;
-	min-height:100%;
-
+	min-height: 100%;
 }
+
+#main {
+	background-color: white;
+}
+
+#footer {
+	padding: 1em 0em;
+}
+
+#footer-container {
+	background-color: white;
+}
+
 
