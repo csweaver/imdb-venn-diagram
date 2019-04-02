@@ -1,1 +1,1 @@
-web: gunicorn imdb_venn_diagram:app
+web: npm run --prefix client/ build ; gunicorn imdb_venn_diagram:app
