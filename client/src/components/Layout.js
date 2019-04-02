@@ -4,17 +4,15 @@ import React from "react";
 export function Footer() {
   return (
     <Segment vertical id="footer">
-      <Container id="footer-container">
+      <Container textAlign="center" id="footer-container">
         <Grid stackable>
           <Grid.Row>
-            <Grid.Column width={6}>
+            <Grid.Column width={16}>
               <p>
                 <Icon name="github square" />
-                <a href="https://github.com/csweaver/cast_overlap">source</a>
+                <a href="https://github.com/csweaver/cast_overlap">source</a> |
+                © 2019 - 2020 &nbsp; Charlotte Weaver
               </p>
-            </Grid.Column>
-            <Grid.Column width={6}>
-              <p> © 2019 - 2020 &nbsp; Charlotte Weaver</p>
             </Grid.Column>
           </Grid.Row>
         </Grid>
