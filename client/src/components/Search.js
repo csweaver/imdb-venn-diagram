@@ -47,10 +47,9 @@ class SearchBox extends Component {
   search = _.debounce(
     () => {
       const { dispatch } = this.props;
-      dispatch(clearSearchResults());
       dispatch(doSearch(this.state.value));
     },
-    1000,
+    500,
     {
       leading: true,
       trailing: true

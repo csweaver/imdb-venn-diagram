@@ -33,6 +33,7 @@ export const doSearch = movie_string => {
         return response.json();
       })
       .then(json => {
+        dispatch(clearSearchResults());
         dispatch(recieveSearch(json));
       })
       .catch(e => {
