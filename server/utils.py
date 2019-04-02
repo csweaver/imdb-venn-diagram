@@ -24,6 +24,7 @@ PATTERNS = [
 	]
 ]
 
+
 def clean_name(name):
 	for pattern in PATTERNS:
 		name = re.sub(pattern, "", name)

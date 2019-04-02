@@ -1,7 +1,7 @@
 import imdb
 
-from .cache import cache
-from .utils import clean_name, intense_get
+from server.cache import cache
+from server.utils import clean_name, intense_get
 
 ia = imdb.IMDb()
 

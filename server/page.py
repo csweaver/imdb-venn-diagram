@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template
+import os
+from flask import Blueprint, render_template, send_from_directory
 
 page = Blueprint(
 	"page",
@@ -11,5 +12,10 @@ page = Blueprint(
 @page.route('/')
 def main_page():
 	return render_template('built-templates/index.html')
+
+@page.route("/favicon.ico")
+def favicon():
+	print(page.root_path)
+	return send_from_directory(os.path.join(page.root_path, "templates/built-templates"), "favicon.ico")
 
 

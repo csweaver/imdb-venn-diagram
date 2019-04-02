@@ -1,7 +1,7 @@
 from flask import Blueprint, current_app, jsonify, request, Response
 import imdb
 
-from .helpers import SearchMovie, get_full_cast, venn_cast, Role
+from server.helpers import SearchMovie, get_full_cast, venn_cast, Role
 
 ia = imdb.IMDb()
 
