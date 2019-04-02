@@ -1,6 +1,6 @@
 const base_url = window.location.hostname.includes("localhost")
   ? "http://localhost:5000/api"
-  : window.location.href + "/api/";
+  : window.location.href + "api";
 const search_url = `${base_url}/search`;
 const venn_url = `${base_url}/venn`;
 const select_url = `${base_url}/select`;
