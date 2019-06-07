@@ -20,15 +20,18 @@ class MovieCast(object):
 
 class Role(object):
 	def __init__(self, c):
+		print(type(c))
 		self.aid = c.getID()
 		self.cid = None
 		self.actor = clean_name(intense_get(c, ["long imdb name", "name"], "long imdb name"))
 		self.character = clean_name(self._init_char(c))
 		self.actor_url = None
 		self.character_url = None
-		self._update_urls()
+		self.img = None
 		if self.aid:
 			self.actor_url = f"https://www.imdb.com/name/nm{self.aid}"
+			self.img = c.get_fullsizeURL()
+			print(self.img)
 
 	def serialize(self):
 		return {
@@ -36,12 +39,12 @@ class Role(object):
 			"actor": self.actor,
 			"character": self.character,
 			"url": self.actor_url,
+			"img": self.img
 		}
 
 	def _init_char(self, c):
 		role = c.currentRole
 		name = ""
-		rid = None
 		try:
 			for r in role:
 				rid = r.getID()
@@ -56,9 +59,6 @@ class Role(object):
 			name = role.get("name", "unnamed role")
 		return name
 
-	def _update_urls(self):
-		if self.aid:
-			self.actor_url = f"https://www.imdb.com/name/nm{self.aid}"
 
 
 class SearchMovie(object):

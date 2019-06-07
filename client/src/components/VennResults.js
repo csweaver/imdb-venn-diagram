@@ -41,13 +41,13 @@ class Venn extends Component {
       if (this.props.overlap_actors.length) {
         rows = this.props.overlap_actors.map((actor, aidx) => {
           const actor_td = (
-            <Table.Cell key={actor[0].id}>
-              <a target="_blank" rel="noopener noreferrer" href={actor[0].url}>
-                {actor[0].actor}
+            <Table.Cell key={actor.id}>
+              <a target="_blank" rel="noopener noreferrer" href={actor.url}>
+                {actor.name}
               </a>
             </Table.Cell>
           );
-          const row = actor.map((role, idx) => {
+          const row = actor.roles.map((role, idx) => {
             return (
               <Table.Cell key={`${role.character}-${idx}`}>
                 {role.character}
