@@ -23,11 +23,19 @@ def venn():
 	overlapping_cast_ids = venn_cast(venn_movies)
 	actors = []
 	for cid in overlapping_cast_ids:
-		actor = []
-		for m in venn_movies:
+		actor = {
+			"id": cid,
+			"name": "",
+			"url": "",
+			"roles": []
+		}
+		for idx, m in enumerate(venn_movies):
 			cast_member = m.cast[cid]
 			character = Role(cast_member)
-			actor.append(character.serialize())
+			actor["roles"].append(character.serialize())
+			if not actor["name"]:
+				actor["name"] = character.actor
+				actor["url"] = character.actor_url
 		actors.append(actor)
 	result = {
 		"movies": [m.serialize() for m in venn_movies],
