@@ -29,3 +29,11 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# client
+server/templates/built-templates/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
