@@ -12,7 +12,7 @@ class MovieCast(object):
 		self.cast_ids = set(self.cast.keys())
 
 	def _init_cast(self):
-		return {c.getID():c for c in self.movie["cast"] if c.getID() is not None}
+		return {c.getID(): c for c in self.movie["cast"] if c.getID() is not None}
 
 	def serialize(self):
 		return SearchMovie(self.movie).serialize()
@@ -20,7 +20,6 @@ class MovieCast(object):
 
 class Role(object):
 	def __init__(self, c):
-		print(type(c))
 		self.aid = c.getID()
 		self.cid = None
 		self.actor = clean_name(intense_get(c, ["long imdb name", "name"], "long imdb name"))
@@ -31,7 +30,6 @@ class Role(object):
 		if self.aid:
 			self.actor_url = f"https://www.imdb.com/name/nm{self.aid}"
 			self.img = c.get_fullsizeURL()
-			print(self.img)
 
 	def serialize(self):
 		return {

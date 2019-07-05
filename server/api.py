@@ -27,6 +27,7 @@ def venn():
 			"id": cid,
 			"name": "",
 			"url": "",
+			"img": "",
 			"roles": []
 		}
 		for idx, m in enumerate(venn_movies):
@@ -36,6 +37,7 @@ def venn():
 			if not actor["name"]:
 				actor["name"] = character.actor
 				actor["url"] = character.actor_url
+				actor["img"] = character.img
 		actors.append(actor)
 	result = {
 		"movies": [m.serialize() for m in venn_movies],
