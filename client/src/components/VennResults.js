@@ -40,8 +40,15 @@ class Venn extends Component {
       );
       if (this.props.overlap_actors.length) {
         rows = this.props.overlap_actors.map((actor, aidx) => {
+          const actor_img = actor.img ? (
+            <img alt={actor.name} src={actor.img} height="54" />
+          ) : (
+            ""
+          );
           const actor_td = (
             <Table.Cell key={actor.id}>
+              {actor_img}
+              <br />
               <a target="_blank" rel="noopener noreferrer" href={actor.url}>
                 {actor.name}
               </a>
