@@ -83,6 +83,7 @@ class SearchBox extends Component {
 const ResultsRender = props => {
   return (
     <span>
+      <img alt={props.title} src={props.image} height={40} />{" "}
       <span key={props.id}>{props.title}</span> - <span>{props.kind}</span>
     </span>
   );

@@ -66,7 +66,7 @@ class SearchMovie(object):
 		self.year = m.get("year", 0),
 		self.kind = m.get("kind", "unknown")
 		self.imdb_url = f"https://www.imdb.com/title/tt{self.mid}/"
-		self.image = m.get("full-size cover url", "")
+		self.image = m.get("cover url", "")
 		self._flatten_attr()
 
 	def serialize(self):
