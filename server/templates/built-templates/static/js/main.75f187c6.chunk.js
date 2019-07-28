@@ -404,6 +404,12 @@
           return i.a.createElement(
             "span",
             null,
+            i.a.createElement("img", {
+              alt: e.title,
+              src: e.image,
+              height: 40
+            }),
+            " ",
             i.a.createElement("span", { key: e.id }, e.title),
             " - ",
             i.a.createElement("span", null, e.kind)
@@ -798,4 +804,4 @@
   },
   [[175, 1, 2]]
 ]);
-//# sourceMappingURL=main.7b989b0f.chunk.js.map
+//# sourceMappingURL=main.75f187c6.chunk.js.map
