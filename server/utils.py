@@ -14,7 +14,7 @@ def intense_get(dictionary, key_list, default=None):
 
 PATTERNS = [
 	re.compile(p) for p in [
-		"\d+\s[Ee]pisodes? ?",
+		"\d+\s[Ee]pisodes?,? ?",
 		"19\d\d ?",
 		"20\d\d ?",
 		"\n",
